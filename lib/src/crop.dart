@@ -390,6 +390,7 @@ class _CropEditorState extends State<_CropEditor> {
                             color: widget.maskColor ?? Colors.black54,
                             style: BorderStyle.solid,
                             width: _borderThickness,
+                            strokeAlign: StrokeAlign.center,
                           ),
                           shape: _withCircleUi
                               ? BoxShape.circle
@@ -746,13 +747,13 @@ Rect _calculateTopLeft(Rect rect, double borderThickness) {
   double fixBorderPixels = 0;
 
   // Workaround to fix pixel issues in HTML renderer
-  if (isHtmlRenderer) {
+  if (WebRenderer.isHtmlRenderer) {
     fixBorderPixels = 1;
   }
 
   return Rect.fromLTWH(
       rect.left - borderThickness + fixBorderPixels,
       rect.top - borderThickness + fixBorderPixels,
-      rect.width + borderThickness * 2 - fixBorderPixels * 2,
-      rect.height + borderThickness * 2 - fixBorderPixels * 2);
+      rect.width + borderThickness - fixBorderPixels * 2,
+      rect.height + borderThickness - fixBorderPixels * 2);
 }
